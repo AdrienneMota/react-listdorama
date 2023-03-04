@@ -17,7 +17,7 @@ export const ContentDefault = styled.div`
 export const Title = styled.h1`
     font-size: 2rem;
     font-weight: 700;
-    color: #C71585;
-    margin: 1rem;
-    align-items: center;
+    color: #FFFFFF;
+    text-align: center;
+    /* background-color: green; */
 `
