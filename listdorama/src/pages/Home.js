@@ -1,74 +1,62 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
+import { doramas } from "../doramasmocados";
+import { useNavigate } from "react-router-dom";
 
 export default function Home(){
+    const [status, setStatus] = useState("seeing")
+    const navigate = useNavigate()
+    
     return(
         <>
             <Header/>
             <Doramas>
-                <div className="dorama">
-                    <img src="https://bancodeseries.com.br/images/posters/14661.jpg" alt="dorama"/>
-                    <div className="infos">
-                    <p className="title">What's Wrong With Secretary Kim</p>
-                    <p className="genre">Comédia Romântica</p>
-                    <div className="grade">
-                        <ion-icon name="star-sharp"></ion-icon>
-                        <h4>5/5</h4>
-                    </div>
-                    </div>                        
-                </div>
-                <div className="dorama">
-                    <img src="https://bancodeseries.com.br/images/posters/14661.jpg" alt="dorama"/>
-                    <div className="infos">
-                    <p className="title">What's Wrong With Secretary Kim</p>
-                    <p className="genre">Comédia Romântica</p>
-                    <div className="grade">
-                        <ion-icon name="star-sharp"></ion-icon>
-                        <h4>5/5</h4>
-                    </div>
-                    </div>                        
-                </div>
-                <div className="dorama">
-                    <img src="https://bancodeseries.com.br/images/posters/14661.jpg" alt="dorama"/>
-                    <div className="infos">
-                    <p className="title">What's Wrong With Secretary Kim</p>
-                    <p className="genre">Comédia Romântica</p>
-                    <div className="grade">
-                        <ion-icon name="star-sharp"></ion-icon>
-                        <h4>5/5</h4>
-                    </div>
-                    </div>                        
-                </div>
+            {
+                doramas.filter( d => d.status === status)
+                    .map( d => 
+                        <div className="dorama">
+                        <img src={d.img} alt="dorama"/>
+                        <div className="infos">
+                        <p className="title">{d.name}</p>
+                        <p className="genre">{d.genre}</p>
+                        <div className="grade">
+                            <ion-icon name="star-sharp"></ion-icon>
+                            <h4>{d.grade}/5</h4>
+                        </div>
+                        </div>                        
+                    </div>    
+                    )
+            }
             </Doramas>
             <Footer>
-                <button>Em andamento</button>
-                <button>Vistos</button>
-                <button>Não vistos</button>
+                <button onClick={ () => setStatus("seeing")}>Vendo</button>
+                <button onClick={ () => setStatus("seen")}>Vistos</button>
+                <button onClick={ () => setStatus("no_seen")}>Não vistos</button>
+                <button onClick={ () => navigate("/dorama")}>Adicionar</button>
             </Footer>
         </>
     )
 }
 
 const Doramas = styled.div`
-    /* background-color: ; */
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    margin-bottom: 3rem;
     .dorama{
         width: 350px;
         margin-right: 1rem;
         margin-top: 1rem;
-        display: flex;
-        /* background-color: yellow; */
+        display: flex;        
         padding: 10px;
         img{
         width: 103px; 
         height: 154px;
         }
         .infos{
-            /* background-color: purple; */
             padding-left: 10px;
             display : flex ;
             flex-direction: column;
@@ -85,7 +73,7 @@ const Doramas = styled.div`
                 display: flex;
                 ion-icon{
                    margin-right: 7px;
-                   color: yellow;
+                   color: #FFD700;
                 }
                 
             }
@@ -114,5 +102,4 @@ const Footer = styled.div`
             border:1px solid #ffffff;
         }
 `
-    
-    
+   

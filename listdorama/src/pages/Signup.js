@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { ContentDefault, Title } from "../components/Content";
 import { FormDefault, Input, Button } from "../components/Form";
 
 export default function Signup(){
     return(
         <ContentDefault>
-            <Title>ListDorama</Title>
+            <Logo>
+                <Title>ListDorama</Title>
+            </Logo>
             <FormDefault>
                 <Input
                     placeholder="Nome de usuário"
@@ -29,3 +32,8 @@ export default function Signup(){
         </ContentDefault>
     )
 }
+
+const Logo = styled.div`
+    color: #C71585;    
+    margin-bottom: 30px;
+`
